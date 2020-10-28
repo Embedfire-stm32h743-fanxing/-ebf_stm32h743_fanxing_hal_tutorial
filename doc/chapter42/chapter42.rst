@@ -43,12 +43,18 @@ STM32H743的内部FLASH包含主存储器、系统存储器、OTP区域以及选
 
 
 各个存储区域的说明如下：
-	用户存储区
+
+-  用户存储区
+
 一般我们说STM32内部FLASH的时候，都是指这个用户存储区区域，它是存储用户应用程序的空间，芯片型号说明中的1M FLASH、2M FLASH都是指这个区域的大小。如我们实验板中使用的STM32H743XIH6型号芯片，主存储器分为一块，共1MB，每块内分8个扇区，每个扇区大小为128KB。它的主存储区域大小为1MB，所以它只包含有表中的扇区0-扇区7。
 与其它FLASH一样，在写入数据前，要先按扇区擦除，而有的时候我们希望能以小规格操纵存储单元，所以STM32针对1MB FLASH的产品还提供了一种双块的存储格式。
-	系统存储区
+
+-	系统存储区
+
 系统存储区大小为128KB，是用户不能访问的区域，它在芯片出厂时已经固化了根安全服务 (root secure services, RSS) 和自举程序启动代码，它负责实现串口、USB（DFU）、I2C、SPI或以太网等ISP烧录功能。
-	选项字节
+
+-	选项字节
+
 选项字节用于配置FLASH的读写保护、电源管理中的BOR级别、软件/硬件看门狗等功能，这部分共32字节。可以通过修改FLASH的选项控制寄存器修改。此区域仅在存储区1中可用。与用户FLASH和系统FLASH不同，该区域并未映射到任何存储器地址，并且仅可通过FLASH寄存器接口进行访问。 
 
 
@@ -114,7 +120,7 @@ PSIZE(1:0)配置  11b                    10b       01b       00b
 由于内部FLASH本身存储有程序数据，若不是有意删除某段程序代码，一般不应修改程序空间的内容，所以在使用
 内部FLASH存储其它数据前需要了解哪一些空间已经写入了程序代码，存储了程序代码的扇区都不应作任何修改。
 通过查询应用程序编译时产生的“\*.map”后缀文件，可以了解程序存储到了哪些区域，它在工程中的打开方式见
- 图4_ ，也可以到工程目录中的“Listing”文件夹中找到。
+图4_ ，也可以到工程目录中的“Listing”文件夹中找到。
 
 .. image:: media/4.jpg
    :align: center
@@ -126,7 +132,7 @@ PSIZE(1:0)配置  11b                    10b       01b       00b
 打开map文件后，查看文件最后部分的区域，可以看到一段以“Memory Map of the
 image”开头的记录(若找不到可用查找功能定位)，见 代码清单44_1_。
 
-.. code-block:: c
+.. code-block:: guess
    :caption: 代码清单 44‑1 map文件中的存储映像分布说明
    :name: 代码清单44_1
 
@@ -384,13 +390,13 @@ FLASH解锁、上锁函数
 本函数包含两个输入参数，分别是擦除flash初始化结构体和返回擦除出错编码，FLASH_EraseInitTypeDef擦除flash初始化结构体主要包含擦除的方式，是扇区擦除还是批量擦除，选择不同电压时实质是选择不同的数据操作位数，并且确定擦除首地址即擦除的扇区个数。函数根据输入参数配置PSIZE位，然后擦除扇区，擦除扇区的时候需要等待一段时间，它使用FLASH_WaitForLastOperation等待，擦除完成的时候才会退出HAL_FLASHEx_Erase函数。
 
 写入数据
-''''''''
+'''''''''''''''
 
 对内部FLASH写入数据不像对SDRAM操作那样直接指针操作就完成了，还要设置一系列的寄存器，利用FLASH_TYPEPROGRAM_DOUBLEWORD、FLASH_TYPEPROGRAM_WORD、FLASH_TYPEPROGRAM_HALFWORD和FLASH_TYPEPROGRAM_BYTE函数
 
 可按字、半字的单位单位写入数据，见 代码清单44_4_。
 
-.. code-block:: c
+.. code-block:: guess
    :caption: 代码清单 44‑4 写入数据
    :name: 代码清单44_4
 
@@ -431,14 +437,14 @@ FLASH解锁、上锁函数
          if (bank == FLASH_BANK_1) {
                /* Clear bank 1 pending flags (if any) */
                __HAL_FLASH_CLEAR_FLAG_BANK1(FLASH_FLAG_EOP_BANK1 | FLASH_FLAG_QW_BANK1 | 
-  FLASH_FLAG_WBNE_BANK1 | FLASH_FLAG_ALL_ERRORS_BANK1);
+               FLASH_FLAG_WBNE_BANK1 | FLASH_FLAG_ALL_ERRORS_BANK1);
 
                /* Set PG bit */
                SET_BIT(FLASH->CR1, FLASH_CR_PG);
          } else {
                /* Clear bank 2 pending flags (if any) */
                __HAL_FLASH_CLEAR_FLAG_BANK2(FLASH_FLAG_EOP_BANK2 | FLASH_FLAG_QW_BANK2 | 
-   FLASH_FLAG_WBNE_BANK2 | FLASH_FLAG_ALL_ERRORS_BANK2);
+               FLASH_FLAG_WBNE_BANK2 | FLASH_FLAG_ALL_ERRORS_BANK2);
 
                /* Set PG bit */
                SET_BIT(FLASH->CR2, FLASH_CR_PG);

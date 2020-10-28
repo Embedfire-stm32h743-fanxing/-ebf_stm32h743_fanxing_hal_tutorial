@@ -376,17 +376,14 @@ HAL库中同名函数的读者，会发现HAL库中的函数内容多了一些�
 但库文件只对“assert_failed”写了函数声明，没有写函数定义，实际用时需要用户来定义，我们一般会用printf函数来输出这些信息，
 见 代码清单12_7_。
 
-.. code-block:: c
+.. code-block:: guess
    :caption: 代码清单 12‑7 assert_failed 输出错误信息
    :name: 代码清单12_7
 
-    void assert_failed(uint8_t* file, uint32_t line)
-
-    {
-
-        printf(“/r/n 输入参数错误，错误文件名=%s,行号=%s”,file,line);
-
-    }
+   void assert_failed(uint8_t* file, uint32_t line)
+   {
+      printf(“/r/n 输入参数错误，错误文件名=%s,行号=%s”,file,line);
+   }
 
 注意在我们的这个LED工程中，还不支持printf函数(在USART外设章节会讲解)，想测试assert_failed输出的读者，
 可以在这个函数中做点亮红色LED灯的操作，作为警告输出测试。

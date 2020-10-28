@@ -362,7 +362,7 @@ STM32的ADC功能繁多，我们设计三个实验尽量完整的展示ADC的功
 硬件设计
 ^^^^^^^^^^^^
 
-电路设计见图 开发板ADC原理图_ 。
+电路设计见图 开发板电位器部分原理图_ 。
 
 .. image:: media/ADC007.png
     :align: center
@@ -725,29 +725,29 @@ ADC转换结果数据使用DMA方式传输至指定的存储区，这样取代�
     :linenos:
 
     //引脚定义
-#define RHEOSTAT_ADC_PIN1                           GPIO_PIN_3  
-#define RHEOSTAT_ADC_PIN2                           GPIO_PIN_4
-#define RHEOSTAT_ADC_PIN3                           GPIO_PIN_5
-#define RHEOSTAT_ADC_PIN4                           GPIO_PIN_6
-#define RHEOSTAT_ADC_PIN5                           GPIO_PIN_7
-#define RHEOSTAT_ADC_PIN6                           GPIO_PIN_8
+    #define RHEOSTAT_ADC_PIN1                           GPIO_PIN_3  
+    #define RHEOSTAT_ADC_PIN2                           GPIO_PIN_4
+    #define RHEOSTAT_ADC_PIN3                           GPIO_PIN_5
+    #define RHEOSTAT_ADC_PIN4                           GPIO_PIN_6
+    #define RHEOSTAT_ADC_PIN5                           GPIO_PIN_7
+    #define RHEOSTAT_ADC_PIN6                           GPIO_PIN_8
 
-#define RHEOSTAT_ADC_GPIO_PORT                      GPIOF                     
-#define RHEOSTAT_ADC_GPIO_CLK_ENABLE()              __GPIOF_CLK_ENABLE()
+    #define RHEOSTAT_ADC_GPIO_PORT                      GPIOF                     
+    #define RHEOSTAT_ADC_GPIO_CLK_ENABLE()              __GPIOF_CLK_ENABLE()
 
-// ADC 序号宏定义
-#define RHEOSTAT_ADC1                        ADC3
-#define RHEOSTAT_ADC1_CLK_ENABLE()           __ADC3_CLK_ENABLE()
+    // ADC 序号宏定义
+    #define RHEOSTAT_ADC1                        ADC3
+    #define RHEOSTAT_ADC1_CLK_ENABLE()           __ADC3_CLK_ENABLE()
 
 
-#define RHEOSTAT_ADC_CHANNEL1                 ADC_CHANNEL_5
-#define RHEOSTAT_ADC_CHANNEL2                 ADC_CHANNEL_9
-#define RHEOSTAT_ADC_CHANNEL3                 ADC_CHANNEL_4
-#define RHEOSTAT_ADC_CHANNEL4                 ADC_CHANNEL_8
-#define RHEOSTAT_ADC_CHANNEL5                 ADC_CHANNEL_3
-#define RHEOSTAT_ADC_CHANNEL6                 ADC_CHANNEL_7
+    #define RHEOSTAT_ADC_CHANNEL1                 ADC_CHANNEL_5
+    #define RHEOSTAT_ADC_CHANNEL2                 ADC_CHANNEL_9
+    #define RHEOSTAT_ADC_CHANNEL3                 ADC_CHANNEL_4
+    #define RHEOSTAT_ADC_CHANNEL4                 ADC_CHANNEL_8
+    #define RHEOSTAT_ADC_CHANNEL5                 ADC_CHANNEL_3
+    #define RHEOSTAT_ADC_CHANNEL6                 ADC_CHANNEL_7
 
-#define Rheostat_ADC12_IRQ                    ADC_IRQn
+    #define Rheostat_ADC12_IRQ                    ADC_IRQn
 
 
 定义多个通道进行多通道ADC实验，并且定义DMA相关配置。

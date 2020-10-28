@@ -23,8 +23,8 @@ STM32长啥样
 
 .. image:: media/image1.png
     :align: center
-    :name: STM32H743IIH6实物图
-    :alt: STM32H743IIH6实物图
+    :name: STM32H743IIT6实物图
+    :alt: STM32H743IIT6实物图
 
 .. image:: media/image2.png
     :align: center
@@ -352,7 +352,7 @@ C语言对寄存器的封装
 C语言的语法规定，结构体内变量的存储空间是连续的，其中32位的变量占用4个字节，16位的变量占用2个字节，
 具体见图 GPIO_TypeDef结构体成员的地址偏移_。
 
-.. image:: media/register/regist008.png
+.. image:: media/image14.png
     :align: center
     :name: GPIO_TypeDef结构体成员的地址偏移
     :alt: GPIO_TypeDef结构体成员的地址偏移
