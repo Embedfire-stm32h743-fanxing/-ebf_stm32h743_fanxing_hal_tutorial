@@ -62,6 +62,7 @@
    doc/chapter41/chapter41
    doc/chapter42/chapter42
    doc/chapter43/chapter43
+   doc/chapter44/chapter44
    doc/connect with us/connect_with_us
 
 .. toctree::
