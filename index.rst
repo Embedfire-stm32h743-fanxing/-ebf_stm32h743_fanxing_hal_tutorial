@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-[野火]STM32 HAL库开发实战指南——基于野火H743战擎开发板
+[野火]STM32 HAL库开发实战指南——基于野火H743繁星开发板
 ========================================================
 
 .. toctree::
@@ -16,7 +16,7 @@
 
 .. toctree::
    :maxdepth: 1
-   :caption: [野火]STM32 HAL库开发实战指南-H743战擎开发板
+   :caption: [野火]STM32 HAL库开发实战指南-H743繁星开发板
    :numbered:
 
    doc/chapter1/chapter1
